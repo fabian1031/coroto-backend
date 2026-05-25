@@ -1,6 +1,7 @@
 package com.coroto.backend.config;
 
-import com.cohorte11.primerProyecto.security.JwtFilter;
+
+import com.coroto.backend.security.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
