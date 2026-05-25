@@ -1,8 +1,8 @@
 package com.coroto.backend.controller;
 
-import com.cohorte11.primerProyecto.DTO.OrdenRequestDTO;
-import com.cohorte11.primerProyecto.DTO.OrdenResponseDTO;
-import com.cohorte11.primerProyecto.service.OrdenService;
+import com.coroto.backend.DTO.OrdenRequestDTO;
+import com.coroto.backend.DTO.OrdenResponseDTO;
+import com.coroto.backend.service.OrdenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

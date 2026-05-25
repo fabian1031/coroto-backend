@@ -1,8 +1,8 @@
 package com.coroto.backend.controller;
 
 
-import com.cohorte11.primerProyecto.model.Cliente;
-import com.cohorte11.primerProyecto.service.ClienteService;
+import com.coroto.backend.model.Cliente;
+import com.coroto.backend.service.ClienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

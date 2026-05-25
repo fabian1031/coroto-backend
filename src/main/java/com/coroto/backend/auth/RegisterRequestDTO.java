@@ -1,7 +1,7 @@
 package com.coroto.backend.auth;
 
 
-import com.cohorte11.primerProyecto.model.Rol;
+import com.coroto.backend.model.Rol;
 
 // RegisterRequestDTO: los datos que el cliente debe enviar para registrarse.
 // Separar este DTO del modelo Usuario evita exponer campos internos

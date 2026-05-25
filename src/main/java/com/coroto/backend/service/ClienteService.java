@@ -1,7 +1,8 @@
 package com.coroto.backend.service;
 
-import com.cohorte11.primerProyecto.model.Cliente;
-import com.cohorte11.primerProyecto.repository.ClienteRepository;
+import com.coroto.backend.model.Cliente;
+import com.coroto.backend.repository.ClienteRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,7 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
-    public Cliente update(Long id, Cliente datos) {
+    public Cliente update(Long id, com.coroto.backend.model.@Valid Cliente datos) {
         Cliente existente = clienteRepository.findById(id).orElse(null);
         if (existente == null) return null;
         existente.setNombre(datos.getNombre());

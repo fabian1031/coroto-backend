@@ -1,7 +1,7 @@
 package com.coroto.backend.DTO;
 
 
-import com.cohorte11.primerProyecto.model.OrdenItem;
+import com.coroto.backend.model.OrdenItem;
 
 public class OrdenItemResponseDTO {
 

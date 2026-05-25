@@ -1,8 +1,8 @@
 package com.coroto.backend.service;
 
 
-import com.cohorte11.primerProyecto.model.Producto;
-import com.cohorte11.primerProyecto.repository.ProductoRepository;
+import com.coroto.backend.model.Producto;
+import com.coroto.backend.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

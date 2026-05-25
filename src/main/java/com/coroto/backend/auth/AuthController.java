@@ -1,10 +1,10 @@
 package com.coroto.backend.auth;
 
 
-import com.cohorte11.primerProyecto.model.Rol;
-import com.cohorte11.primerProyecto.model.Usuario;
-import com.cohorte11.primerProyecto.repository.UsuarioRepository;
-import com.cohorte11.primerProyecto.security.JwtUtil;
+import com.coroto.backend.model.Rol;
+import com.coroto.backend.model.Usuario;
+import com.coroto.backend.repository.UsuarioRepository;
+import com.coroto.backend.security.JwtUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

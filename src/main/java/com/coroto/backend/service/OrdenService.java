@@ -1,12 +1,12 @@
 package com.coroto.backend.service;
 
 
-import com.cohorte11.primerProyecto.DTO.OrdenRequestDTO;
-import com.cohorte11.primerProyecto.DTO.OrdenResponseDTO;
-import com.cohorte11.primerProyecto.model.Cliente;
-import com.cohorte11.primerProyecto.model.Orden;
-import com.cohorte11.primerProyecto.repository.ClienteRepository;
-import com.cohorte11.primerProyecto.repository.OrdenRepository;
+import com.coroto.backend.DTO.OrdenRequestDTO;
+import com.coroto.backend.DTO.OrdenResponseDTO;
+import com.coroto.backend.model.Cliente;
+import com.coroto.backend.model.Orden;
+import com.coroto.backend.repository.ClienteRepository;
+import com.coroto.backend.repository.OrdenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

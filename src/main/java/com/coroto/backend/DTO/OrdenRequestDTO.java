@@ -1,6 +1,6 @@
 package com.coroto.backend.DTO;
 
-import com.cohorte11.primerProyecto.model.EstadoOrden;
+import com.coroto.backend.model.EstadoOrden;
 
 import java.time.LocalDateTime;
 

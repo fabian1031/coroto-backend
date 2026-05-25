@@ -1,6 +1,6 @@
 package com.coroto.backend.repository;
 
-import com.cohorte11.primerProyecto.model.Usuario;
+import com.coroto.backend.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
