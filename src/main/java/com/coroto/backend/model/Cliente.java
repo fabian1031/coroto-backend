@@ -18,10 +18,22 @@ public class Cliente {
     @Column(nullable = false)
     private String nombre;
 
+    @Column(nullable = false)
+    private String apellido;
+
     @NotBlank(message = "No debe quedar vacio")
     @Email(message = "El email debe tener formato valido")
     @Column(nullable = false, unique = true)
     private String email;
+
+    @NotBlank(message = "No debe quedar vacio")
+    @Column(nullable = false)
+    private String tipo_documento;
+
+    @NotBlank(message = "No debe quedar vacio")
+    @Column(nullable = false, unique = true)
+    private String numero_documento;
+
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

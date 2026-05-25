@@ -1,8 +1,12 @@
 package com.coroto.backend.model;
 
 public enum CategoriaProducto {
-    ELECTRONICA,
-    ROPA,
-    ALIMENTOS,
-    HOGAR
+    LAPTOPS,
+    PROCESADORES,
+    TARJETAS_VIDEO,
+    MEMORIAS_RAM,
+    MONITORES,
+    MOTHERBOARDS,
+    PERIFERICOS,
+    CASES
 }

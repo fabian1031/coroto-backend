@@ -1,7 +1,7 @@
 package com.coroto.backend.config;
 
 
-import com.cohorte11.primerProyecto.repository.UsuarioRepository;
+import com.coroto.backend.repository.UsuarioRepository;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
