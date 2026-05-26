@@ -1,5 +1,6 @@
 package com.coroto.backend.model;
 
+import com.coroto.backend.model.enums.CategoriaProducto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

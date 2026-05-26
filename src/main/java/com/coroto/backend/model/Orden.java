@@ -1,5 +1,6 @@
 package com.coroto.backend.model;
 
+import com.coroto.backend.model.enums.EstadoOrden;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
@@ -25,17 +26,17 @@ public class Orden {
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)
-    private Cliente cliente;
+    private User user;
 
     @OneToMany(mappedBy = "orden", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrdenItem> items = new ArrayList<>();
 
     public Orden() {}
 
-    public Orden(LocalDateTime fecha, EstadoOrden estado, Cliente cliente) {
+    public Orden(LocalDateTime fecha, EstadoOrden estado, User user) {
         this.fecha = fecha;
         this.estado = estado;
-        this.cliente = cliente;
+        this.user = user;
     }
 
     public Long getId() { return id; }
@@ -46,8 +47,8 @@ public class Orden {
     public EstadoOrden getEstado() { return estado; }
     public void setEstado(EstadoOrden estado) { this.estado = estado; }
 
-    public Cliente getCliente() { return cliente; }
-    public void setCliente(Cliente cliente) { this.cliente = cliente; }
+    public User getCliente() { return user; }
+    public void setCliente(User user) { this.user = user; }
 
     public List<OrdenItem> getItems() { return items; }
     public void setItems(List<OrdenItem> items) { this.items = items; }

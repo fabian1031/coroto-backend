@@ -1,5 +1,5 @@
 package com.coroto.backend.DTO;
-import com.coroto.backend.model.EstadoOrden;
+import com.coroto.backend.model.enums.EstadoOrden;
 import com.coroto.backend.model.Orden;
 
 import java.time.LocalDateTime;

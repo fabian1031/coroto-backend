@@ -1,5 +1,6 @@
 package com.coroto.backend.model;
 
+import com.coroto.backend.model.enums.Rol;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "cliente")
-public class Cliente {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -43,11 +44,11 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Orden> ordenes = new ArrayList<>();
 
-    public Cliente() {
+    public User() {
         this.rol = Rol.CLIENTE;
     }
 
-    public Cliente(String nombre, String email,  List<Orden> ordenes) {
+    public User(String nombre, String email, List<Orden> ordenes) {
         this.nombre = nombre;
         this.email = email;
         this.ordenes = ordenes;

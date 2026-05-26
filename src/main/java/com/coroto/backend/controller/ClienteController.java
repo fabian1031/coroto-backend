@@ -1,7 +1,7 @@
 package com.coroto.backend.controller;
 
 
-import com.coroto.backend.model.Cliente;
+import com.coroto.backend.model.User;
 import com.coroto.backend.service.ClienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,26 +23,26 @@ public class ClienteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Cliente>> obtenerTodos() {
+    public ResponseEntity<List<User>> obtenerTodos() {
         return ResponseEntity.ok(clienteService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cliente> obtenerPorId(@PathVariable Long id) {
-        Cliente cliente = clienteService.findById(id);
-        if (cliente == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(cliente);
+    public ResponseEntity<User> obtenerPorId(@PathVariable Long id) {
+        User user = clienteService.findById(id);
+        if (user == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> crear(@Valid @RequestBody Cliente cliente) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(cliente));
+    public ResponseEntity<User> crear(@Valid @RequestBody User user) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(user));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> actualizar(@PathVariable Long id,
-                                              @Valid @RequestBody Cliente datos) {
-        Cliente actualizado = clienteService.update(id, datos);
+    public ResponseEntity<User> actualizar(@PathVariable Long id,
+                                           @Valid @RequestBody User datos) {
+        User actualizado = clienteService.update(id, datos);
         if (actualizado == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(actualizado);
     }

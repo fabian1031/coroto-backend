@@ -1,7 +1,8 @@
 package com.coroto.backend.model;
 
+import com.coroto.backend.model.enums.Genero;
+import com.coroto.backend.model.enums.Rol;
 import jakarta.persistence.*;
-import org.hibernate.annotations.CollectionId;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

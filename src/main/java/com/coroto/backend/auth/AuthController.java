@@ -1,7 +1,7 @@
 package com.coroto.backend.auth;
 
 
-import com.coroto.backend.model.Rol;
+import com.coroto.backend.model.enums.Rol;
 import com.coroto.backend.model.Usuario;
 import com.coroto.backend.repository.UsuarioRepository;
 import com.coroto.backend.security.JwtUtil;

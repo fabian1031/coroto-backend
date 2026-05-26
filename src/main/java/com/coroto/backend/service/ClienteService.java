@@ -1,6 +1,6 @@
 package com.coroto.backend.service;
 
-import com.coroto.backend.model.Cliente;
+import com.coroto.backend.model.User;
 import com.coroto.backend.repository.ClienteRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +18,20 @@ public class ClienteService {
         this.clienteRepository = clienteRepository;
     }
 
-    public List<Cliente> findAll() {
+    public List<User> findAll() {
         return clienteRepository.findAll();
     }
 
-    public Cliente findById(Long id){
+    public User findById(Long id){
         return clienteRepository.findById(id).orElse(null);
     }
 
-    public Cliente save(Cliente cliente){
-        return clienteRepository.save(cliente);
+    public User save(User user){
+        return clienteRepository.save(user);
     }
 
-    public Cliente update(Long id, com.coroto.backend.model.@Valid Cliente datos) {
-        Cliente existente = clienteRepository.findById(id).orElse(null);
+    public User update(Long id, @Valid User datos) {
+        User existente = clienteRepository.findById(id).orElse(null);
         if (existente == null) return null;
         existente.setNombre(datos.getNombre());
         existente.setEmail(datos.getEmail());
