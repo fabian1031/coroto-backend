@@ -1,4 +1,4 @@
-package com.coroto.backend.auth;
+package com.coroto.backend.DTO.auth;
 
 
 import com.coroto.backend.model.Usuario;

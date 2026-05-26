@@ -1,7 +1,7 @@
 package com.coroto.backend.controller;
 
-import com.coroto.backend.auth.LoginRequestDTO;
-import com.coroto.backend.auth.RegisterRequestDTO;
+import com.coroto.backend.DTO.auth.LoginRequestDTO;
+import com.coroto.backend.DTO.auth.RegisterRequestDTO;
 import com.coroto.backend.model.Usuario;
 import com.coroto.backend.security.JwtUtil;
 import com.coroto.backend.service.UsuarioService;
@@ -68,10 +68,7 @@ public class AuthController {
         String token = jwtUtil.generateToken((UserDetails) usuario);
 
         return ResponseEntity.ok(Map.of(
-                "token", token,
-                "email", usuario.getEmail(),
-                "rol", usuario.getRol(),
-                "nombre", usuario.getNombre()
+                "token", token
         ));
     }
 }

@@ -1,6 +1,6 @@
 package com.coroto.backend.service;
 
-import com.coroto.backend.auth.RegisterRequestDTO;
+import com.coroto.backend.DTO.auth.RegisterRequestDTO;
 import com.coroto.backend.model.Usuario;
 import com.coroto.backend.repository.UsuarioRepository;
 import jakarta.validation.Valid;

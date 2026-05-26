@@ -1,7 +1,6 @@
-package com.coroto.backend.auth;
+package com.coroto.backend.DTO.auth;
 
 
-// LoginRequestDTO: credenciales que el cliente envía para autenticarse.
 public class LoginRequestDTO {
 
     private String email;
