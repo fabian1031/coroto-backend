@@ -7,16 +7,23 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name="productos")
+@Table(name = "productos")
 public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private CategoriaProducto categoria;
+
     @NotBlank(message = "El nombre tiene que estar")
     @Column(nullable = false)
     private String nombre;
+
+    @Column(nullable = false)
+    private String descripcion;
 
     @NotNull(message = "El precio es obligatorio")
     @Min(value = 0, message = "El precio no puede ser negativo")
@@ -24,21 +31,28 @@ public class Producto {
     private Double precio;
 
     @Column(nullable = false)
-    private Integer stock;
+    private Integer cantidad;
 
-    @Enumerated(EnumType.STRING)
+    @Column(nullable = true)
+    private String image_url;
+
     @Column(nullable = false)
-    private CategoriaProducto categoria;
+    private Boolean is_active;
 
     public Producto() {
+        this.is_active = true;
     }
 
-    public Producto(Long id, String nombre, Double precio, Integer stock, CategoriaProducto categoria) {
+    public Producto(Long id, CategoriaProducto categoria, String nombre, String descripcion,
+                    Double precio, Integer cantidad, String image_url, Boolean is_active) {
         this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.stock = stock;
         this.categoria = categoria;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.cantidad = cantidad;
+        this.image_url = image_url;
+        this.is_active = is_active;
     }
 
     public Long getId() {
@@ -49,12 +63,28 @@ public class Producto {
         this.id = id;
     }
 
+    public CategoriaProducto getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(CategoriaProducto categoria) {
+        this.categoria = categoria;
+    }
+
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public Double getPrecio() {
@@ -65,19 +95,27 @@ public class Producto {
         this.precio = precio;
     }
 
-    public Integer getStock() {
-        return stock;
+    public Integer getCantidad() {
+        return cantidad;
     }
 
-    public void setStock(Integer stock) {
-        this.stock = stock;
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 
-    public CategoriaProducto getCategoria() {
-        return categoria;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setCategoria(CategoriaProducto categoria) {
-        this.categoria = categoria;
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
+
+    public Boolean getIs_active() {
+        return is_active;
+    }
+
+    public void setIs_active(Boolean is_active) {
+        this.is_active = is_active;
     }
 }
