@@ -23,76 +23,82 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @PostMapping
-    public ResponseEntity<Usuario> crear(@Valid @RequestBody RegisterRequestDTO registerRequest) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(
-                        usuarioService.crearUsuario(registerRequest)
-                );
-    }
-
     @GetMapping
     public ResponseEntity<List<Usuario>> obtenerTodos() {
-        return ResponseEntity.ok(clienteService.findAll());
+        return ResponseEntity.ok(usuarioService.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> obtenerPorId(@PathVariable Long id) {
-        Usuario usuario = clienteService.findById(id);
-        if (usuario == null) return ResponseEntity.notFound().build();
+
+        Usuario usuario = usuarioService.findById(id);
+
+        if (usuario == null) {
+            return ResponseEntity.notFound().build();
+        }
+
         return ResponseEntity.ok(usuario);
     }
 
-
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> actualizar(@PathVariable Long id,
-                                              @Valid @RequestBody Usuario datos) {
-        Usuario actualizado = clienteService.update(id, datos);
-        if (actualizado == null) return ResponseEntity.notFound().build();
+    public ResponseEntity<Usuario> actualizar(
+            @PathVariable Long id,
+            @Valid @RequestBody Usuario datos
+    ) {
+
+        Usuario actualizado =
+                usuarioService.update(id, datos);
+
+        if (actualizado == null) {
+            return ResponseEntity.notFound().build();
+        }
+
         return ResponseEntity.ok(actualizado);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        clienteService.delete(id);
+
+        usuarioService.delete(id);
+
         return ResponseEntity.noContent().build();
     }
 }
 
+
 //@RestController
-//@RequestMapping("/clientes")
-//public class ClienteController {
+//@RequestMapping("/usuarios")
+//public class usuarioController {
 //
-//    private final ClienteService clienteService;
+//    private final usuarioService usuarioService;
 //
 //    @Autowired
-//    public ClienteController(ClienteService clienteService) {
-//        this.clienteService = clienteService;
+//    public usuarioController(usuarioService usuarioService) {
+//        this.usuarioService = usuarioService;
 //    }
 //
 //    @GetMapping
-//    public List<Cliente> obtenerTodos() {
-//        return clienteService.findAll();
+//    public List<usuario> obtenerTodos() {
+//        return usuarioService.findAll();
 //    }
 //
 //    @GetMapping("/{id}")
-//    public Cliente obtenerPorId(@PathVariable Long id) {
-//        return clienteService.findById(id);
+//    public usuario obtenerPorId(@PathVariable Long id) {
+//        return usuarioService.findById(id);
 //    }
 //
 //    @PostMapping
-//    public Cliente crear(@RequestBody Cliente cliente) {
-//        return clienteService.save(cliente);
+//    public usuario crear(@RequestBody usuario usuario) {
+//        return usuarioService.save(usuario);
 //    }
 //
 //    @PutMapping("/{id}")
-//    public Cliente actualizar(@PathVariable Long id, @RequestBody Cliente datos) {
-//        return clienteService.update(id, datos);
+//    public usuario actualizar(@PathVariable Long id, @RequestBody usuario datos) {
+//        return usuarioService.update(id, datos);
 //    }
 //
 //    @DeleteMapping("/{id}")
 //    public void eliminar(@PathVariable Long id) {
-//        clienteService.delete(id);
+//        usuarioService.delete(id);
 //    }
 //}

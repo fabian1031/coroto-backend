@@ -56,7 +56,7 @@ public class JwtFilter extends OncePerRequestFilter {
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             // Cargar el usuario desde la base de datos.
-            UserDetails userDetails = usuarioRepository
+            UserDetails userDetails = (UserDetails) usuarioRepository
                     .findByEmail(email)
                     .orElse(null);
 

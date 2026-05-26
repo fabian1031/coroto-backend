@@ -29,7 +29,7 @@ public class ApplicationConfig {
     // cargar un usuario por su nombre de usuario (en nuestro caso, el email).
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> usuarioRepository
+        return username -> (org.springframework.security.core.userdetails.UserDetails) usuarioRepository
                 .findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException(
                         "Usuario no encontrado: " + username

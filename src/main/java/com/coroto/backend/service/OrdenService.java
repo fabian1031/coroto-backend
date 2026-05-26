@@ -1,11 +1,10 @@
 package com.coroto.backend.service;
 
-
 import com.coroto.backend.DTO.OrdenRequestDTO;
 import com.coroto.backend.DTO.OrdenResponseDTO;
 import com.coroto.backend.model.Usuario;
 import com.coroto.backend.model.Orden;
-import com.coroto.backend.repository.ClienteRepository;
+import com.coroto.backend.repository.UsuarioRepository;
 import com.coroto.backend.repository.OrdenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,18 +12,19 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @Service
 public class OrdenService {
 
     private final OrdenRepository ordenRepository;
-    private final ClienteRepository clienteRepository;
+    private final UsuarioRepository usuarioRepository;
 
     @Autowired
-    public OrdenService(OrdenRepository ordenRepository,
-                        ClienteRepository clienteRepository) {
+    public OrdenService(
+            OrdenRepository ordenRepository,
+            UsuarioRepository usuarioRepository
+    ) {
         this.ordenRepository = ordenRepository;
-        this.clienteRepository = clienteRepository;
+        this.usuarioRepository = usuarioRepository;
     }
 
     public List<OrdenResponseDTO> findAll() {
@@ -36,72 +36,59 @@ public class OrdenService {
 
     public OrdenResponseDTO findById(Long id) {
         Orden orden = ordenRepository.findById(id).orElse(null);
-        if (orden == null) return null;
+
+        if (orden == null) {
+            return null;
+        }
+
         return OrdenResponseDTO.desde(orden);
     }
 
     public OrdenResponseDTO save(OrdenRequestDTO dto) {
-        Usuario usuario = clienteRepository.findById(dto.getClienteId()).orElse(null);
-        Orden orden = new Orden(dto.getFecha(), dto.getEstado(), usuario);
-        return OrdenResponseDTO.desde(ordenRepository.save(orden));
+
+        Usuario usuario = usuarioRepository
+                .findById(dto.getUsuarioId())
+                .orElseThrow(() ->
+                        new RuntimeException("Usuario no encontrado"));
+
+        Orden orden = new Orden();
+
+        orden.setFechaPedido(dto.getFechaPedido());
+        orden.setEstado(dto.getEstado());
+        orden.setEstadoPago(dto.getEstadoPago());
+        orden.setDireccionEnvio(dto.getDireccionEnvio());
+        orden.setCiudadEnvio(dto.getCiudadEnvio());
+        orden.setUsuario(usuario);
+
+        Orden guardada = ordenRepository.save(orden);
+
+        return OrdenResponseDTO.desde(guardada);
     }
 
     public OrdenResponseDTO update(Long id, OrdenRequestDTO dto) {
-        Orden existente = ordenRepository.findById(id).orElse(null);
-        if (existente == null) return null;
-        Usuario usuario = clienteRepository.findById(dto.getClienteId()).orElse(null);
-        existente.setFecha(dto.getFecha());
+
+        Orden existente = ordenRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Pedido no encontrado"));
+
+        Usuario usuario = usuarioRepository
+                .findById(dto.getUsuarioId())
+                .orElseThrow(() ->
+                        new RuntimeException("Usuario no encontrado"));
+
+        existente.setFechaPedido(dto.getFechaPedido());
         existente.setEstado(dto.getEstado());
-        existente.setCliente(usuario);
-        return OrdenResponseDTO.desde(ordenRepository.save(existente));
+        existente.setEstadoPago(dto.getEstadoPago());
+        existente.setDireccionEnvio(dto.getDireccionEnvio());
+        existente.setCiudadEnvio(dto.getCiudadEnvio());
+        existente.setUsuario(usuario);
+
+        Orden actualizada = ordenRepository.save(existente);
+
+        return OrdenResponseDTO.desde(actualizada);
     }
 
     public void delete(Long id) {
         ordenRepository.deleteById(id);
     }
 }
-
-
-//
-//@Service
-//public class OrdenService {
-//
-//    private final OrdenRepository ordenRepository;
-//    private final ClienteRepository clienteRepository;
-//
-//    @Autowired
-//    public OrdenService(OrdenRepository ordenRepository, ClienteRepository clienteRepository) {
-//        this.ordenRepository = ordenRepository;
-//        this.clienteRepository = clienteRepository;
-//    }
-//
-//    public List<Orden> findAll() {
-//        return ordenRepository.findAll();
-//    }
-//
-//    public Orden findById(Long id) {
-//        return ordenRepository.findById(id).orElse(null);
-//    }
-//
-//    public Orden save(Orden orden) {
-//        return ordenRepository.save(orden);
-//    }
-////    public Orden save(Orden orden) {
-////        Cliente cliente = clienteRepository.findById(orden.getCliente().getId()).orElse(null);
-////        orden.setCliente(cliente);
-////        return ordenRepository.save(orden);
-////    }
-//
-//    public Orden update(Long id, Orden datos) {
-//        Orden existente = ordenRepository.findById(id).orElse(null);
-//        if (existente == null) return null;
-//        existente.setFecha(datos.getFecha());
-//        existente.setEstado(datos.getEstado());
-//        existente.setCliente(datos.getCliente());
-//        return ordenRepository.save(existente);
-//    }
-//
-//    public void delete(Long id) {
-//        ordenRepository.deleteById(id);
-//    }
-//}

@@ -1,41 +1,85 @@
 package com.coroto.backend.DTO;
-import com.coroto.backend.model.enums.EstadoPedido;
-import com.coroto.backend.model.Orden;
 
+import com.coroto.backend.model.Orden;
+import com.coroto.backend.model.enums.EstadoPago;
+import com.coroto.backend.model.enums.EstadoPedido;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class OrdenResponseDTO {
 
     private Long id;
-    private LocalDateTime fecha;
+
+    private LocalDateTime fechaPedido;
+
+    private EstadoPago estadoPago;
+
     private EstadoPedido estado;
-    private Long clienteId;
-    private String clienteNombre;
+
+    private String direccionEnvio;
+
+    private String ciudadEnvio;
+
+    private BigDecimal total;
+
+    private Long usuarioId;
+
+    private String usuarioNombre;
 
     public OrdenResponseDTO() {}
 
     public static OrdenResponseDTO desde(Orden orden) {
+
         OrdenResponseDTO dto = new OrdenResponseDTO();
+
         dto.id = orden.getId();
-        dto.fecha = orden.getFecha();
+        dto.fechaPedido = orden.getFechaPedido();
+        dto.estadoPago = orden.getEstadoPago();
         dto.estado = orden.getEstado();
-        dto.clienteId = orden.getCliente().getId();
-        dto.clienteNombre = orden.getCliente().getNombre();
+        dto.direccionEnvio = orden.getDireccionEnvio();
+        dto.ciudadEnvio = orden.getCiudadEnvio();
+        dto.total = orden.getTotal();
+
+        dto.usuarioId = orden.getUsuario().getId();
+        dto.usuarioNombre = orden.getUsuario().getNombre();
+
         return dto;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public LocalDateTime getFecha() { return fecha; }
-    public void setFecha(LocalDateTime fecha) { this.fecha = fecha; }
+    public LocalDateTime getFechaPedido() {
+        return fechaPedido;
+    }
 
-    public EstadoPedido getEstado() { return estado; }
-    public void setEstado(EstadoPedido estado) { this.estado = estado; }
+    public EstadoPago getEstadoPago() {
+        return estadoPago;
+    }
 
-    public Long getClienteId() { return clienteId; }
-    public void setClienteId(Long clienteId) { this.clienteId = clienteId; }
+    public EstadoPedido getEstado() {
+        return estado;
+    }
 
-    public String getClienteNombre() { return clienteNombre; }
-    public void setClienteNombre(String nombre) { this.clienteNombre = nombre; }
+    public String getDireccionEnvio() {
+        return direccionEnvio;
+    }
+
+    public String getCiudadEnvio() {
+        return ciudadEnvio;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public String getUsuarioNombre() {
+        return usuarioNombre;
+    }
 }

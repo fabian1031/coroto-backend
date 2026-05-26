@@ -3,6 +3,8 @@ package com.coroto.backend.DTO;
 
 import com.coroto.backend.model.OrdenItem;
 
+import java.math.BigDecimal;
+
 public class OrdenItemResponseDTO {
 
     private Long id;
@@ -10,7 +12,7 @@ public class OrdenItemResponseDTO {
     private Long productoId;
     private String productoNombre;
     private Integer cantidad;
-    private Double precioUnitario;
+    private BigDecimal precioUnitario;
 
     public OrdenItemResponseDTO() {}
 
@@ -29,18 +31,23 @@ public class OrdenItemResponseDTO {
     public void setId(Long id) { this.id = id; }
 
     public Long getOrdenId() { return ordenId; }
+
     public void setOrdenId(Long ordenId) { this.ordenId = ordenId; }
 
     public Long getProductoId() { return productoId; }
+
     public void setProductoId(Long productoId) { this.productoId = productoId; }
 
     public String getProductoNombre() { return productoNombre; }
+
     public void setProductoNombre(String productoNombre) { this.productoNombre = productoNombre; }
 
     public Integer getCantidad() { return cantidad; }
+
     public void setCantidad(Integer cantidad) { this.cantidad = cantidad; }
 
-    public Double getPrecioUnitario() { return precioUnitario; }
-    public void setPrecioUnitario(Double precioUnitario) { this.precioUnitario = precioUnitario; }
+    public BigDecimal getPrecioUnitario() { return precioUnitario; }
+
+    public void setPrecioUnitario(BigDecimal precioUnitario) { this.precioUnitario = precioUnitario; }
 }
 

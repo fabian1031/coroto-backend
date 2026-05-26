@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ordenes")
+@RequestMapping("/pedidos")
 public class OrdenController {
 
     private final OrdenService ordenService;
