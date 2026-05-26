@@ -3,7 +3,7 @@ package com.coroto.backend.service;
 
 import com.coroto.backend.DTO.OrdenRequestDTO;
 import com.coroto.backend.DTO.OrdenResponseDTO;
-import com.coroto.backend.model.User;
+import com.coroto.backend.model.Usuario;
 import com.coroto.backend.model.Orden;
 import com.coroto.backend.repository.ClienteRepository;
 import com.coroto.backend.repository.OrdenRepository;
@@ -41,18 +41,18 @@ public class OrdenService {
     }
 
     public OrdenResponseDTO save(OrdenRequestDTO dto) {
-        User user = clienteRepository.findById(dto.getClienteId()).orElse(null);
-        Orden orden = new Orden(dto.getFecha(), dto.getEstado(), user);
+        Usuario usuario = clienteRepository.findById(dto.getClienteId()).orElse(null);
+        Orden orden = new Orden(dto.getFecha(), dto.getEstado(), usuario);
         return OrdenResponseDTO.desde(ordenRepository.save(orden));
     }
 
     public OrdenResponseDTO update(Long id, OrdenRequestDTO dto) {
         Orden existente = ordenRepository.findById(id).orElse(null);
         if (existente == null) return null;
-        User user = clienteRepository.findById(dto.getClienteId()).orElse(null);
+        Usuario usuario = clienteRepository.findById(dto.getClienteId()).orElse(null);
         existente.setFecha(dto.getFecha());
         existente.setEstado(dto.getEstado());
-        existente.setCliente(user);
+        existente.setCliente(usuario);
         return OrdenResponseDTO.desde(ordenRepository.save(existente));
     }
 

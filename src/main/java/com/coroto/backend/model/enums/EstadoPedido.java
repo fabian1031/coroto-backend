@@ -1,6 +1,6 @@
 package com.coroto.backend.model.enums;
 
-public enum EstadoOrden {
+public enum EstadoPedido {
     PENDIENTE,
     PROCESANDO,
     CANCELADA,

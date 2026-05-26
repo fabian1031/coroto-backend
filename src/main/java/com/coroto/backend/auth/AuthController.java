@@ -2,7 +2,7 @@ package com.coroto.backend.auth;
 
 
 import com.coroto.backend.model.enums.Rol;
-import com.coroto.backend.model.Usuario;
+import com.coroto.backend.model.UsuarioABorrar;
 import com.coroto.backend.repository.UsuarioRepository;
 import com.coroto.backend.security.JwtUtil;
 import org.springframework.http.ResponseEntity;
@@ -52,7 +52,7 @@ public class AuthController {
 
         // Hashear la contraseña antes de guardar.
         // NUNCA se guarda la contraseña en texto plano.
-        Usuario usuario = new Usuario(
+        UsuarioABorrar usuario = new UsuarioABorrar(
                 request.getEmail(),
                 passwordEncoder.encode(request.getPassword()),
                 request.getNombre(),
@@ -85,7 +85,7 @@ public class AuthController {
 
         // Si llegamos aquí, la autenticación fue exitosa.
         // getPrincipal() retorna el UserDetails del usuario autenticado.
-        Usuario usuario = (Usuario) authentication.getPrincipal();
+        UsuarioABorrar usuario = (UsuarioABorrar) authentication.getPrincipal();
 
         // Generar el token JWT con los datos del usuario.
         String token = jwtUtil.generateToken(usuario);
