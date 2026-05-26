@@ -54,7 +54,7 @@ public class Usuario {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<Pedido> pedidos = new ArrayList<>();
+    private List<Orden> pedidos = new ArrayList<>();
 
     // CONSTRUCTORES
     public Usuario() {
@@ -146,11 +146,11 @@ public class Usuario {
         this.activo = activo;
     }
 
-    public List<Pedido> getPedidos() {
+    public List<Orden> getPedidos() {
         return pedidos;
     }
 
-    public void setPedidos(List<Pedido> pedidos) {
+    public void setPedidos(List<Orden> pedidos) {
         this.pedidos = pedidos;
     }
 }
