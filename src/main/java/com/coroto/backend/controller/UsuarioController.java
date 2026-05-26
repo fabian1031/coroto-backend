@@ -8,8 +8,8 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 @SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -63,41 +63,3 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
 }
-
-
-//@RestController
-//@RequestMapping("/usuarios")
-//public class usuarioController {
-//
-//    private final usuarioService usuarioService;
-//
-//    @Autowired
-//    public usuarioController(usuarioService usuarioService) {
-//        this.usuarioService = usuarioService;
-//    }
-//
-//    @GetMapping
-//    public List<usuario> obtenerTodos() {
-//        return usuarioService.findAll();
-//    }
-//
-//    @GetMapping("/{id}")
-//    public usuario obtenerPorId(@PathVariable Long id) {
-//        return usuarioService.findById(id);
-//    }
-//
-//    @PostMapping
-//    public usuario crear(@RequestBody usuario usuario) {
-//        return usuarioService.save(usuario);
-//    }
-//
-//    @PutMapping("/{id}")
-//    public usuario actualizar(@PathVariable Long id, @RequestBody usuario datos) {
-//        return usuarioService.update(id, datos);
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public void eliminar(@PathVariable Long id) {
-//        usuarioService.delete(id);
-//    }
-//}

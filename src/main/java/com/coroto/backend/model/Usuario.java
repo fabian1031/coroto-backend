@@ -6,13 +6,17 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
-public class Usuario {
+public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -62,7 +66,7 @@ public class Usuario {
         this.activo = true;
     }
 
-    public Usuario(String nombre, String apellido, String email, String password,
+    public Usuario(String nombre, String apellido, String email, String passwordEncriptado,
                    String tipoDocumento, String numeroDocumento) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -152,5 +156,42 @@ public class Usuario {
 
     public void setPedidos(List<Orden> pedidos) {
         this.pedidos = pedidos;
+    }
+
+    // Implementación de UserDetails
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // Conviertes tu enum Rol a authorities de Spring Security
+        return List.of(new SimpleGrantedAuthority("ROLE_" + rol.name()));
+    }
+
+    @Override
+    public String getPassword() {
+        return this.passwordEncriptado;  // Retorna la contraseña encriptada
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;  // Usamos email como username
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;  // O implementa lógica de expiración si la tienes
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;  // O implementa lógica de bloqueo
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;  // O implementa lógica de expiración de credenciales
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.activo;  // Importante: usa tu campo activo
     }
 }

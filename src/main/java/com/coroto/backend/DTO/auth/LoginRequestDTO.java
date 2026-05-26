@@ -1,13 +1,19 @@
 package com.coroto.backend.DTO.auth;
 
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 public class LoginRequestDTO {
 
+    @NotBlank(message = "El email es obligatorio")
+    @Email(message = "Formato de email inválido")
     private String email;
+
+    @NotBlank(message = "La contraseña es obligatoria")
     private String password;
 
-    public LoginRequestDTO() {}
-
+    // Getters y Setters
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
     public String getPassword() { return password; }
