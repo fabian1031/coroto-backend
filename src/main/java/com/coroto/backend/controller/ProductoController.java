@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 
 import java.util.List;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/productos")
 public class ProductoController {
@@ -25,11 +28,6 @@ public class ProductoController {
     public ResponseEntity<List<Producto>> obtenerTodos() {
         return ResponseEntity.ok(productoService.findAll());
     }
-
-    //@GetMapping
-//    public List<Producto> obtenerTodos() {
-//        return productoService.findAll();
-//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Producto> obtenerPorId(@PathVariable Long id) {
@@ -57,41 +55,3 @@ public class ProductoController {
         return ResponseEntity.noContent().build();
     }
 }
-
-
-//
-//@RestController
-//@RequestMapping("/productos")
-//public class ProductoController {
-//    private final ProductoService productoService;
-//
-//    @Autowired
-//    public ProductoController(ProductoService productoService) {
-//        this.productoService = productoService;
-//    }
-//
-//    @GetMapping
-//    public List<Producto> obtenerTodos() {
-//        return productoService.findAll();
-//    }
-//
-//    @GetMapping("/{id}")
-//    public Producto obtenerPorId(@PathVariable Long id){
-//        return productoService.findById(id);
-//    }
-//
-//    @PutMapping("/{id}")
-//    public Producto actualizar(@PathVariable Long id, @RequestBody Producto datos){
-//        return productoService.update(id, datos);
-//    }
-//
-//    @PostMapping
-//    public Producto crear(@RequestBody Producto producto){
-//        return productoService.save(producto);
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public  void eliminar(@PathVariable Long id){
-//        productoService.delete(id);
-//    }
-//}

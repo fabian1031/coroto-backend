@@ -3,14 +3,17 @@ package com.coroto.backend.controller;
 import com.coroto.backend.DTO.OrdenRequestDTO;
 import com.coroto.backend.DTO.OrdenResponseDTO;
 import com.coroto.backend.service.OrdenService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/pedidos")
 public class OrdenController {
