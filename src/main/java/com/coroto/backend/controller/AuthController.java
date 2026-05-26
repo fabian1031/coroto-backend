@@ -1,8 +1,9 @@
-package com.coroto.backend.auth;
+package com.coroto.backend.controller;
 
 
+import com.coroto.backend.auth.LoginRequestDTO;
+import com.coroto.backend.auth.RegisterRequestDTO;
 import com.coroto.backend.model.enums.Rol;
-import com.coroto.backend.model.UsuarioABorrar;
 import com.coroto.backend.repository.UsuarioRepository;
 import com.coroto.backend.security.JwtUtil;
 import org.springframework.http.ResponseEntity;

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,24 +17,33 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @NotBlank(message = "El nombre no puede estar vacío")
+    @Size(min = 2, max = 50, message = "El nombre debe tener entre 2 y 50 caracteres")
+    @Column(nullable = false, length = 50)
     private String nombre;
 
-    @Column(nullable = false)
+    @NotBlank(message = "El apellido no puede estar vacío")
+    @Size(min = 2, max = 50, message = "El apellido debe tener entre 2 y 50 caracteres")
+    @Column(nullable = false, length = 50)
     private String apellido;
 
-    @NotBlank(message = "No debe quedar vacío")
-    @Email(message = "El email debe tener formato valido")
-    @Column(nullable = false, unique = true)
+    @NotBlank(message = "El email no puede estar vacío")
+    @Email(message = "El email debe tener formato válido")
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-    @NotBlank(message = "No debe quedar vacio")
+    @NotBlank(message = "La contraseña no puede estar vacía")
+    @Size(min = 6, max = 100, message = "La contraseña debe tener entre 6 y 100 caracteres")
     @Column(nullable = false)
-    private String tipo_documento;
+    private String passwordEncriptado;
 
-    @NotBlank(message = "No debe quedar vacio")
-    @Column(nullable = false, unique = true)
-    private String numero_documento;
+    @NotBlank(message = "El tipo de documento no puede estar vacío")
+    @Column(nullable = false, length = 20)
+    private String tipoDocumento;
+
+    @NotBlank(message = "El número de documento no puede estar vacío")
+    @Column(nullable = false, unique = true, length = 20)
+    private String numeroDocumento;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -47,31 +57,21 @@ public class Usuario {
     private List<Pedido> pedidos = new ArrayList<>();
 
     // CONSTRUCTORES
-
     public Usuario() {
         this.rol = Rol.CLIENTE;
         this.activo = true;
     }
 
-    public Usuario(
-            Long id,
-            String nombre,
-            String apellido,
-            String email,
-            String tipo_documento,
-            String numero_documento,
-            Rol rol, Boolean activo,
-            List<Pedido> pedidos
-    ){
-        this.id = id;
+    public Usuario(String nombre, String apellido, String email, String password,
+                   String tipoDocumento, String numeroDocumento) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
-        this.tipo_documento = tipo_documento;
-        this.numero_documento = numero_documento;
-        this.rol = rol;
-        this.activo = activo;
-        this.pedidos = pedidos;
+        this.passwordEncriptado = passwordEncriptado;
+        this.tipoDocumento = tipoDocumento;
+        this.numeroDocumento = numeroDocumento;
+        this.rol = Rol.CLIENTE;
+        this.activo = true;
     }
 
     public Long getId() {
@@ -106,20 +106,28 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getTipo_documento() {
-        return tipo_documento;
+    public String getPasswordEncriptado() {
+        return passwordEncriptado;
     }
 
-    public void setTipo_documento(String tipo_documento) {
-        this.tipo_documento = tipo_documento;
+    public void setPasswordEncriptado(String passwordEncriptado) {
+        this.passwordEncriptado = passwordEncriptado;
     }
 
-    public String getNumero_documento() {
-        return numero_documento;
+    public String getTipoDocumento() {
+        return tipoDocumento;
     }
 
-    public void setNumero_documento(String numero_documento) {
-        this.numero_documento = numero_documento;
+    public void setTipoDocumento(String tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
+
+    public String getNumeroDocumento() {
+        return numeroDocumento;
+    }
+
+    public void setNumeroDocumento(String numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
     }
 
     public Rol getRol() {
@@ -142,7 +150,7 @@ public class Usuario {
         return pedidos;
     }
 
-    public void setPedidos(List<Pedido> ordenes) {
-        this.pedidos = ordenes;
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 }

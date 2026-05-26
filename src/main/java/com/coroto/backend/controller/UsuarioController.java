@@ -1,8 +1,9 @@
 package com.coroto.backend.controller;
 
 
+import com.coroto.backend.auth.RegisterRequestDTO;
 import com.coroto.backend.model.Usuario;
-import com.coroto.backend.service.ClienteService;
+import com.coroto.backend.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,14 +13,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/clientes")
-public class ClienteController {
+@RequestMapping("/api/v1/auth")
+public class UsuarioController {
 
-    private final ClienteService clienteService;
+    private final UsuarioService usuarioService;
 
     @Autowired
-    public ClienteController(ClienteService clienteService) {
-        this.clienteService = clienteService;
+    public UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
+
+    @PostMapping
+    public ResponseEntity<Usuario> crear(@Valid @RequestBody RegisterRequestDTO registerRequest) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(
+                        usuarioService.crearUsuario(registerRequest)
+                );
     }
 
     @GetMapping
@@ -34,10 +44,6 @@ public class ClienteController {
         return ResponseEntity.ok(usuario);
     }
 
-    @PostMapping
-    public ResponseEntity<Usuario> crear(@Valid @RequestBody Usuario usuario) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(usuario));
-    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> actualizar(@PathVariable Long id,
