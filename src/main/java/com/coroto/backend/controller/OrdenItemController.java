@@ -4,6 +4,7 @@ package com.coroto.backend.controller;
 import com.coroto.backend.DTO.OrdenItemRequestDTO;
 import com.coroto.backend.DTO.OrdenItemResponseDTO;
 import com.coroto.backend.service.OrdenItemService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/orden-items")
 public class OrdenItemController {
