@@ -26,11 +26,6 @@ public class ProductoController {
         return ResponseEntity.ok(productoService.findAll());
     }
 
-    //@GetMapping
-//    public List<Producto> obtenerTodos() {
-//        return productoService.findAll();
-//    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Producto> obtenerPorId(@PathVariable Long id) {
         Producto producto = productoService.findById(id);
@@ -57,41 +52,3 @@ public class ProductoController {
         return ResponseEntity.noContent().build();
     }
 }
-
-
-//
-//@RestController
-//@RequestMapping("/productos")
-//public class ProductoController {
-//    private final ProductoService productoService;
-//
-//    @Autowired
-//    public ProductoController(ProductoService productoService) {
-//        this.productoService = productoService;
-//    }
-//
-//    @GetMapping
-//    public List<Producto> obtenerTodos() {
-//        return productoService.findAll();
-//    }
-//
-//    @GetMapping("/{id}")
-//    public Producto obtenerPorId(@PathVariable Long id){
-//        return productoService.findById(id);
-//    }
-//
-//    @PutMapping("/{id}")
-//    public Producto actualizar(@PathVariable Long id, @RequestBody Producto datos){
-//        return productoService.update(id, datos);
-//    }
-//
-//    @PostMapping
-//    public Producto crear(@RequestBody Producto producto){
-//        return productoService.save(producto);
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public  void eliminar(@PathVariable Long id){
-//        productoService.delete(id);
-//    }
-//}
