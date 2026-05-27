@@ -29,8 +29,8 @@ public class RegisterRequestDTO {
     private String password;
 
     @NotBlank(message = "El tipo de documento es obligatorio")
-    @Pattern(regexp = "^(DNI|NIE|PASAPORTE|CEDULA)$",
-            message = "Tipo de documento inválido. Valores permitidos: DNI, NIE, PASAPORTE, CEDULA")
+    @Pattern(regexp = "^(CC|PASAPORTE)$",
+            message = "Tipo de documento inválido. Valores permitidos: CC o PASAPORTE")
     private String tipoDocumento;
 
     @NotBlank(message = "El número de documento es obligatorio")
