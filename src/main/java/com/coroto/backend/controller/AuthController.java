@@ -40,7 +40,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(
-            @RequestBody RegisterRequestDTO request
+            @Valid @RequestBody RegisterRequestDTO request
     ) {
 
         Usuario usuario =

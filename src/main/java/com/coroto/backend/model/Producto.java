@@ -33,89 +33,49 @@ public class Producto {
     @Column(nullable = false)
     private Integer cantidad;
 
-    @Column(nullable = true)
-    private String image_url;
+    @Column(name = "image_url", nullable = true)
+    private String imageUrl;
 
-    @Column(nullable = false)
-    private Boolean is_active;
+    @Column(name = "is_active", nullable = false)
+    private Boolean activo;
 
     public Producto() {
-        this.is_active = true;
+        this.activo = true;
     }
 
     public Producto(Long id, CategoriaProducto categoria, String nombre, String descripcion,
-                    Double precio, Integer cantidad, String image_url, Boolean is_active) {
+                    Double precio, Integer cantidad, String imageUrl, Boolean activo) {
         this.id = id;
         this.categoria = categoria;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.cantidad = cantidad;
-        this.image_url = image_url;
-        this.is_active = is_active;
+        this.imageUrl = imageUrl;
+        this.activo = activo;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public CategoriaProducto getCategoria() { return categoria; }
+    public void setCategoria(CategoriaProducto categoria) { this.categoria = categoria; }
 
-    public CategoriaProducto getCategoria() {
-        return categoria;
-    }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public void setCategoria(CategoriaProducto categoria) {
-        this.categoria = categoria;
-    }
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public Double getPrecio() { return precio; }
+    public void setPrecio(Double precio) { this.precio = precio; }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public Integer getCantidad() { return cantidad; }
+    public void setCantidad(Integer cantidad) { this.cantidad = cantidad; }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public String getImage_url() {
-        return image_url;
-    }
-
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
-    }
-
-    public Boolean getIs_active() {
-        return is_active;
-    }
-
-    public void setIs_active(Boolean is_active) {
-        this.is_active = is_active;
-    }
+    public Boolean getActivo() { return activo; }
+    public void setActivo(Boolean activo) { this.activo = activo; }
 }

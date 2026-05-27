@@ -44,8 +44,12 @@ public class OrdenItemService {
     }
 
     public OrdenItemResponseDTO save(OrdenItemRequestDTO dto) {
-        Orden orden = ordenRepository.findById(dto.getOrdenId()).orElse(null);
-        Producto producto = productoRepository.findById(dto.getProductoId()).orElse(null);
+        Orden orden = ordenRepository.findById(dto.getOrdenId())
+                .orElseThrow(() -> new RuntimeException("Pedido no encontrado con id: " + dto.getOrdenId()));
+
+        Producto producto = productoRepository.findById(dto.getProductoId())
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado con id: " + dto.getProductoId()));
+
         OrdenItem item = new OrdenItem(dto.getCantidad(), dto.getPrecioUnitario(), orden, producto);
         return OrdenItemResponseDTO.desde(ordenItemRepository.save(item));
     }
@@ -62,43 +66,3 @@ public class OrdenItemService {
         ordenItemRepository.deleteById(id);
     }
 }
-
-
-//
-//
-//@Service
-//public class OrdenItemService {
-//
-//    private final OrdenItemRepository ordenItemRepository;
-//
-//    @Autowired
-//    public OrdenItemService(OrdenItemRepository ordenItemRepository) {
-//        this.ordenItemRepository = ordenItemRepository;
-//    }
-//
-//    public List<OrdenItem> findAll() {
-//        return ordenItemRepository.findAll();
-//    }
-//
-//    public OrdenItem findById(Long id) {
-//        return ordenItemRepository.findById(id).orElse(null);
-//    }
-//
-//    public OrdenItem save(OrdenItem item) {
-//        return ordenItemRepository.save(item);
-//    }
-//
-//    public OrdenItem update(Long id, OrdenItem datos) {
-//        OrdenItem existente = ordenItemRepository.findById(id).orElse(null);
-//        if (existente == null) return null;
-//        existente.setCantidad(datos.getCantidad());
-//        existente.setPrecioUnitario(datos.getPrecioUnitario());
-//        existente.setOrden(datos.getOrden());
-//        existente.setProducto(datos.getProducto());
-//        return ordenItemRepository.save(existente);
-//    }
-//
-//    public void delete(Long id) {
-//        ordenItemRepository.deleteById(id);
-//    }
-//}

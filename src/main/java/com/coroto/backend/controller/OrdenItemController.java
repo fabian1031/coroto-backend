@@ -1,6 +1,5 @@
 package com.coroto.backend.controller;
 
-
 import com.coroto.backend.DTO.OrdenItemRequestDTO;
 import com.coroto.backend.DTO.OrdenItemResponseDTO;
 import com.coroto.backend.service.OrdenItemService;
@@ -12,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/detalle_pedido")
@@ -55,79 +55,3 @@ public class OrdenItemController {
         return ResponseEntity.noContent().build();
     }
 }
-
-//@RestController
-//@RequestMapping("/orden-items")
-//public class OrdenItemController {
-//
-//    private final OrdenItemService ordenItemService;
-//
-//    @Autowired
-//    public OrdenItemController(OrdenItemService ordenItemService) {
-//        this.ordenItemService = ordenItemService;
-//    }
-//
-//    @GetMapping
-//    public List<OrdenItemResponseDTO> obtenerTodos() {
-//        return ordenItemService.findAll();
-//    }
-//
-//    @GetMapping("/{id}")
-//    public OrdenItemResponseDTO obtenerPorId(@PathVariable Long id) {
-//        return ordenItemService.findById(id);
-//    }
-//
-//    @PostMapping
-//    public OrdenItemResponseDTO crear(@RequestBody OrdenItemRequestDTO dto) {
-//        return ordenItemService.save(dto);
-//    }
-//
-//    @PutMapping("/{id}")
-//    public OrdenItemResponseDTO actualizar(@PathVariable Long id,
-//                                           @RequestBody OrdenItemRequestDTO dto) {
-//        return ordenItemService.update(id, dto);
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public void eliminar(@PathVariable Long id) {
-//        ordenItemService.delete(id);
-//    }
-//}
-
-//
-//@RestController
-//@RequestMapping("/orden-items")
-//public class OrdenItemController {
-//
-//    private final OrdenItemService ordenItemService;
-//
-//    @Autowired
-//    public OrdenItemController(OrdenItemService ordenItemService) {
-//        this.ordenItemService = ordenItemService;
-//    }
-//
-//    @GetMapping
-//    public List<OrdenItem> obtenerTodos() {
-//        return ordenItemService.findAll();
-//    }
-//
-//    @GetMapping("/{id}")
-//    public OrdenItem obtenerPorId(@PathVariable Long id) {
-//        return ordenItemService.findById(id);
-//    }
-//
-//    @PostMapping
-//    public OrdenItem crear(@RequestBody OrdenItem item) {
-//        return ordenItemService.save(item);
-//    }
-//
-//    @PutMapping("/{id}")
-//    public OrdenItem actualizar(@PathVariable Long id, @RequestBody OrdenItem datos) {
-//        return ordenItemService.update(id, datos);
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public void eliminar(@PathVariable Long id) {
-//        ordenItemService.delete(id);
-//    }
-//}

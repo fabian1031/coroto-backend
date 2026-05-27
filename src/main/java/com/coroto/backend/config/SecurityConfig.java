@@ -1,6 +1,5 @@
 package com.coroto.backend.config;
 
-
 import com.coroto.backend.security.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +31,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-    .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configure(http))
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -49,22 +48,30 @@ public class SecurityConfig {
                         // Endpoints de autenticación: públicos — son la puerta de entrada.
                         .requestMatchers("/auth/**").permitAll()
 
-                        // Consultas (GET): accesibles para CLIENTE y ADMIN.
-                        .requestMatchers(HttpMethod.GET, "/productos/**").hasAnyRole("ADMIN", "CLIENTE")
-                        .requestMatchers(HttpMethod.GET, "/clientes/**").hasAnyRole("ADMIN", "CLIENTE")
-                        .requestMatchers(HttpMethod.GET, "/ordenes/**").hasAnyRole("ADMIN", "CLIENTE")
-
-                        // Modificaciones: solo ADMIN puede crear, actualizar o eliminar.
-                        .requestMatchers(HttpMethod.POST, "/productos/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/productos/**").hasRole("ADMIN")
+                        // Productos: GET para CLIENTE y ADMIN, modificaciones solo ADMIN.
+                        .requestMatchers(HttpMethod.GET,    "/productos/**").hasAnyRole("ADMIN", "CLIENTE")
+                        .requestMatchers(HttpMethod.POST,   "/productos/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,    "/productos/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/productos/**").hasRole("ADMIN")
 
-                        .requestMatchers(HttpMethod.POST, "/clientes/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/clientes/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/clientes/**").hasRole("ADMIN")
+                        // Usuarios: GET para ADMIN y CLIENTE, modificaciones solo ADMIN.
+                        .requestMatchers(HttpMethod.GET,    "/usuarios/**").hasAnyRole("ADMIN", "CLIENTE")
+                        .requestMatchers(HttpMethod.POST,   "/usuarios/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,    "/usuarios/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/usuarios/**").hasRole("ADMIN")
 
-                        // Órdenes: CLIENTE puede crear y ver sus propias órdenes.
-                        .requestMatchers(HttpMethod.POST, "/ordenes/**").hasAnyRole("ADMIN", "CLIENTE")
+                        // Pedidos: GET para ambos, POST para ambos (CLIENTE puede crear su pedido),
+                        // modificaciones y eliminación solo ADMIN.
+                        .requestMatchers(HttpMethod.GET,    "/pedidos/**").hasAnyRole("ADMIN", "CLIENTE")
+                        .requestMatchers(HttpMethod.POST,   "/pedidos/**").hasAnyRole("ADMIN", "CLIENTE")
+                        .requestMatchers(HttpMethod.PUT,    "/pedidos/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/pedidos/**").hasRole("ADMIN")
+
+                        // Detalle de pedido: GET y POST para ambos, modificaciones solo ADMIN.
+                        .requestMatchers(HttpMethod.GET,    "/detalle_pedido/**").hasAnyRole("ADMIN", "CLIENTE")
+                        .requestMatchers(HttpMethod.POST,   "/detalle_pedido/**").hasAnyRole("ADMIN", "CLIENTE")
+                        .requestMatchers(HttpMethod.PUT,    "/detalle_pedido/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/detalle_pedido/**").hasRole("ADMIN")
 
                         // Todo lo demás requiere autenticación.
                         .anyRequest().authenticated()

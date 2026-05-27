@@ -2,10 +2,10 @@ package com.coroto.backend.service;
 
 import com.coroto.backend.DTO.OrdenRequestDTO;
 import com.coroto.backend.DTO.OrdenResponseDTO;
-import com.coroto.backend.model.Usuario;
 import com.coroto.backend.model.Orden;
-import com.coroto.backend.repository.UsuarioRepository;
+import com.coroto.backend.model.Usuario;
 import com.coroto.backend.repository.OrdenRepository;
+import com.coroto.backend.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,24 +35,16 @@ public class OrdenService {
     }
 
     public OrdenResponseDTO findById(Long id) {
-        Orden orden = ordenRepository.findById(id).orElse(null);
-
-        if (orden == null) {
-            return null;
-        }
-
-        return OrdenResponseDTO.desde(orden);
+        return ordenRepository.findById(id)
+                .map(OrdenResponseDTO::desde)
+                .orElse(null);
     }
 
     public OrdenResponseDTO save(OrdenRequestDTO dto) {
-
-        Usuario usuario = usuarioRepository
-                .findById(dto.getUsuarioId())
-                .orElseThrow(() ->
-                        new RuntimeException("Usuario no encontrado"));
+        Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + dto.getUsuarioId()));
 
         Orden orden = new Orden();
-
         orden.setFechaPedido(dto.getFechaPedido());
         orden.setEstado(dto.getEstado());
         orden.setEstadoPago(dto.getEstadoPago());
@@ -60,21 +52,15 @@ public class OrdenService {
         orden.setCiudadEnvio(dto.getCiudadEnvio());
         orden.setUsuario(usuario);
 
-        Orden guardada = ordenRepository.save(orden);
-
-        return OrdenResponseDTO.desde(guardada);
+        return OrdenResponseDTO.desde(ordenRepository.save(orden));
     }
 
     public OrdenResponseDTO update(Long id, OrdenRequestDTO dto) {
+        Orden existente = ordenRepository.findById(id).orElse(null);
+        if (existente == null) return null;
 
-        Orden existente = ordenRepository.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("Pedido no encontrado"));
-
-        Usuario usuario = usuarioRepository
-                .findById(dto.getUsuarioId())
-                .orElseThrow(() ->
-                        new RuntimeException("Usuario no encontrado"));
+        Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + dto.getUsuarioId()));
 
         existente.setFechaPedido(dto.getFechaPedido());
         existente.setEstado(dto.getEstado());
@@ -83,9 +69,7 @@ public class OrdenService {
         existente.setCiudadEnvio(dto.getCiudadEnvio());
         existente.setUsuario(usuario);
 
-        Orden actualizada = ordenRepository.save(existente);
-
-        return OrdenResponseDTO.desde(actualizada);
+        return OrdenResponseDTO.desde(ordenRepository.save(existente));
     }
 
     public void delete(Long id) {
